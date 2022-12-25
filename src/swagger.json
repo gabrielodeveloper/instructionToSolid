@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Instruction SOLID Documentation",
+    "description": "This is a API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "gabriel0211oliveira15@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "admin": false,
+                "id": "7ba90fa0-8053-40c6-8d55-94cf6ee937c3",
+                "name": "Username",
+                "email": "username@email.com",
+                "created_at": "2022-12-23",
+                "updated_at": "2022-12-23"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "User already exist"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "summary": "List all users",
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": [
+                  {
+                    "admin": false,
+                    "id": "7ba90fa0-8053-40c6-8d55-94cf6ee937c3",
+                    "name": "Username",
+                    "email": "username@email.com",
+                    "created_at": "2022-12-23",
+                    "updated_at": "2022-12-23"
+                  },
+                  {
+                    "admin": false,
+                    "id": "7ba90fa0-8053-40c6-8d55-94cf6ee937c3",
+                    "name": "Username",
+                    "email": "username@email.com",
+                    "created_at": "2022-12-23",
+                    "updated_at": "2022-12-23"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "Don't have a users."
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user_id",
+            "required": true
+          }
+        ],
+        "summary": "List a specific user",
+        "description": "List a specific user",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "admin": false,
+                  "id": "7ba90fa0-8053-40c6-8d55-94cf6ee937c3",
+                  "name": "Username",
+                  "email": "username@email.com",
+                  "created_at": "2022-12-23",
+                  "updated_at": "2022-12-23"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User not found!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "summary": "Make admin user",
+        "description": "Make admin user",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "admin": true,
+                  "id": "7ba90fa0-8053-40c6-8d55-94cf6ee937c3",
+                  "name": "Username",
+                  "email": "username@email.com",
+                  "created_at": "2022-12-23",
+                  "updated_at": "2022-12-23"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "proporties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
